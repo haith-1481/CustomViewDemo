@@ -23,6 +23,8 @@
 		2CB2EF3C22B1EFC200D5C6F8 /* CollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB2EF3A22B1EFC200D5C6F8 /* CollectionViewCell.xib */; };
 		2CB2EF4322B1F87000D5C6F8 /* CustomHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB2EF4122B1F87000D5C6F8 /* CustomHeaderCell.swift */; };
 		2CB2EF4422B1F87000D5C6F8 /* CustomHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB2EF4222B1F87000D5C6F8 /* CustomHeaderCell.xib */; };
+		2CB2EF4722B243FC00D5C6F8 /* TableViewCellWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB2EF4522B243FC00D5C6F8 /* TableViewCellWithImage.swift */; };
+		2CB2EF4822B243FC00D5C6F8 /* TableViewCellWithImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB2EF4622B243FC00D5C6F8 /* TableViewCellWithImage.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +67,8 @@
 		2CB2EF3A22B1EFC200D5C6F8 /* CollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CollectionViewCell.xib; sourceTree = "<group>"; };
 		2CB2EF4122B1F87000D5C6F8 /* CustomHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderCell.swift; sourceTree = "<group>"; };
 		2CB2EF4222B1F87000D5C6F8 /* CustomHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomHeaderCell.xib; sourceTree = "<group>"; };
+		2CB2EF4522B243FC00D5C6F8 /* TableViewCellWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellWithImage.swift; sourceTree = "<group>"; };
+		2CB2EF4622B243FC00D5C6F8 /* TableViewCellWithImage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCellWithImage.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -164,6 +168,8 @@
 				2CB2EF3A22B1EFC200D5C6F8 /* CollectionViewCell.xib */,
 				2CB2EF4122B1F87000D5C6F8 /* CustomHeaderCell.swift */,
 				2CB2EF4222B1F87000D5C6F8 /* CustomHeaderCell.xib */,
+				2CB2EF4522B243FC00D5C6F8 /* TableViewCellWithImage.swift */,
+				2CB2EF4622B243FC00D5C6F8 /* TableViewCellWithImage.xib */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -272,6 +278,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2CB2EF4822B243FC00D5C6F8 /* TableViewCellWithImage.xib in Resources */,
 				2CB2EF0C22B1D74F00D5C6F8 /* LaunchScreen.storyboard in Resources */,
 				2CB2EF3822B1EFA800D5C6F8 /* TableViewCell.xib in Resources */,
 				2CB2EF0922B1D74F00D5C6F8 /* Assets.xcassets in Resources */,
@@ -306,6 +313,7 @@
 				2CB2EEFF22B1D74C00D5C6F8 /* AppDelegate.swift in Sources */,
 				2CB2EF0722B1D74C00D5C6F8 /* CustomViewsDemo.xcdatamodeld in Sources */,
 				2CB2EF3B22B1EFC200D5C6F8 /* CollectionViewCell.swift in Sources */,
+				2CB2EF4722B243FC00D5C6F8 /* TableViewCellWithImage.swift in Sources */,
 				2CB2EF3722B1EFA800D5C6F8 /* TableViewCell.swift in Sources */,
 				2CB2EF4322B1F87000D5C6F8 /* CustomHeaderCell.swift in Sources */,
 				2CB2EF3022B1DFF300D5C6F8 /* TableViewController.swift in Sources */,

@@ -15,17 +15,36 @@ class TableViewController: UIViewController {
     var countriesinEurope = ["France","Spain","Germany"]
     var countriesinAsia = ["Japan","China","India"]
     var countriesInSouthAmerica = ["Argentia","Brasil","Chile"]
+    var testCellSizing = ["Imagine that you have a movie-crazy client who wants an app to show off a number of favorite film directors and some of their most prominent work. Not just any directors, actually, just their favorite auteurs.", "“Auteurs?” you ask, “That sounds French.”", "Oui, it is. The auteur theory of film making arose in France in the 1940s and it basically means that the director is the driving creative force behind a film. Not every director is an auteur — only the ones who stamp each film with their individual styles. Think Tarantino or Scorsese. And not everyone agrees with this theory — don’t get your screenwriter friend started. But, the client is always right, so you’re ready to start rolling.", "There’s one problem: “We started making the app, but we’re stumped at how to display the content in a table view,” your client admits. “Our table view cells have to resize (gulp!) dynamically! Can you make it work?”"]
+    var imageArr: [UIImage] = []
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        let nib = UINib(nibName: "TableViewCell", bundle: nil)
-        tableView.register(nib, forCellReuseIdentifier: "TableViewCell")
-        let headerNib = UINib(nibName: "CustomHeaderCell", bundle: nil)
-        tableView.register(headerNib, forCellReuseIdentifier: "CustomHeaderCell")
+        setupTableView()
 
         // self.clearsSelectionOnViewWillAppear = false
 
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+    }
+
+    private func setupTableView() {
+        tableView.rowHeight = UITableView.automaticDimension
+        tableView.estimatedRowHeight = 600
+        let nib = UINib(nibName: "TableViewCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "TableViewCell")
+        let headerNib = UINib(nibName: "CustomHeaderCell", bundle: nil)
+        tableView.register(headerNib, forCellReuseIdentifier: "CustomHeaderCell")
+        let imageNib = UINib(nibName: "TableViewCellWithImage", bundle: nil)
+        tableView.register(imageNib, forCellReuseIdentifier: "TableViewCellWithImage")
+        let image = UIImage(imageLiteralResourceName: "doge_meme")
+        let image1 = UIImage(imageLiteralResourceName: "Snowy_Owl")
+        let image2 = UIImage(imageLiteralResourceName: "momo")
+        let image3 = UIImage(imageLiteralResourceName: "tower")
+        imageArr.append(image)
+        imageArr.append(image1)
+        imageArr.append(image2)
+        imageArr.append(image3)
+
     }
 
 }
@@ -33,15 +52,13 @@ class TableViewController: UIViewController {
 extension TableViewController: UITableViewDelegate, UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 3
+        return 5
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch section {
-        case 0:
-            return 3
-        case 1:
-            return 3
+        case 3, 4:
+            return 4
         default:
             return 3
         }
@@ -49,18 +66,25 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as? TableViewCell else { return UITableViewCell() }
-        switch (indexPath.section) {
-        case 0:
-            cell.label.text = countriesinEurope[indexPath.row]
-        case 1:
-            cell.label.text = countriesinAsia[indexPath.row]
-        case 2:
-            cell.label.text = countriesInSouthAmerica[indexPath.row]
-        //return sectionHeaderView
-        default:
-            cell.label.text = "Other"
+        guard let cellWithImage = tableView.dequeueReusableCell(withIdentifier: "TableViewCellWithImage", for: indexPath) as? TableViewCellWithImage else { return UITableViewCell() }
+        if indexPath.section == 4 {
+            cellWithImage.displayImage.image = imageArr[indexPath.row]
+            return cellWithImage
+        } else {
+            switch (indexPath.section) {
+            case 0:
+                cell.label.text = countriesinEurope[indexPath.row]
+            case 1:
+                cell.label.text = countriesinAsia[indexPath.row]
+            case 2:
+                cell.label.text = countriesInSouthAmerica[indexPath.row]
+            case 3:
+                cell.label.text = testCellSizing[indexPath.row]
+            default:
+                cell.label.text = "Other"
+            }
+            return cell
         }
-        return cell
     }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
