@@ -11,37 +11,100 @@ import UIKit
 class TableViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
+    
+    var countriesinEurope = ["France","Spain","Germany"]
+    var countriesinAsia = ["Japan","China","India"]
+    var countriesInSouthAmerica = ["Argentia","Brasil","Chile"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let nib = UINib(nibName: "TableViewCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "TableViewCell")
+        let headerNib = UINib(nibName: "CustomHeaderCell", bundle: nil)
+        tableView.register(headerNib, forCellReuseIdentifier: "CustomHeaderCell")
 
         // self.clearsSelectionOnViewWillAppear = false
 
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
 
-    // MARK: - Table view data source
-
 }
 
 extension TableViewController: UITableViewDelegate, UITableViewDataSource {
 
     func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 0
+        return 3
     }
 
-
-
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        return 0
+        switch section {
+        case 0:
+            return 3
+        case 1:
+            return 3
+        default:
+            return 3
+        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-        let cell = UITableViewCell()
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as? TableViewCell else { return UITableViewCell() }
+        switch (indexPath.section) {
+        case 0:
+            cell.label.text = countriesinEurope[indexPath.row]
+        case 1:
+            cell.label.text = countriesinAsia[indexPath.row]
+        case 2:
+            cell.label.text = countriesInSouthAmerica[indexPath.row]
+        //return sectionHeaderView
+        default:
+            cell.label.text = "Other"
+        }
         return cell
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerCell = tableView.dequeueReusableCell(withIdentifier: "CustomHeaderCell") as! CustomHeaderCell
+        headerCell.backgroundColor = .orange
+
+        switch (section) {
+        case 0:
+            headerCell.label.text = "Europe";
+        //return sectionHeaderView
+        case 1:
+            headerCell.label.text = "Asia";
+        //return sectionHeaderView
+        case 2:
+            headerCell.label.text = "South America";
+        //return sectionHeaderView
+        default:
+            headerCell.label.text = "Other";
+        }
+
+        return headerCell
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        switch (section) {
+        case 0:
+            return 20
+        case 1:
+            return 35
+        case 2:
+            return 50
+        default:
+            return 35
+        }
+    }
+
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 40))
+        footerView.backgroundColor = .lightGray
+        return footerView
+    }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 40
     }
 
     /*
