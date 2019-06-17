@@ -25,6 +25,7 @@
 		2CB2EF4422B1F87000D5C6F8 /* CustomHeaderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB2EF4222B1F87000D5C6F8 /* CustomHeaderCell.xib */; };
 		2CB2EF4722B243FC00D5C6F8 /* TableViewCellWithImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB2EF4522B243FC00D5C6F8 /* TableViewCellWithImage.swift */; };
 		2CB2EF4822B243FC00D5C6F8 /* TableViewCellWithImage.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2CB2EF4622B243FC00D5C6F8 /* TableViewCellWithImage.xib */; };
+		2CB2EF4A22B250D200D5C6F8 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB2EF4922B250D200D5C6F8 /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,7 @@
 		2CB2EF4222B1F87000D5C6F8 /* CustomHeaderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomHeaderCell.xib; sourceTree = "<group>"; };
 		2CB2EF4522B243FC00D5C6F8 /* TableViewCellWithImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellWithImage.swift; sourceTree = "<group>"; };
 		2CB2EF4622B243FC00D5C6F8 /* TableViewCellWithImage.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TableViewCellWithImage.xib; sourceTree = "<group>"; };
+		2CB2EF4922B250D200D5C6F8 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +121,7 @@
 		2CB2EEFD22B1D74C00D5C6F8 /* CustomViewsDemo */ = {
 			isa = PBXGroup;
 			children = (
+				2CB2EF4922B250D200D5C6F8 /* Constants.swift */,
 				2CB2EF3122B1DFFF00D5C6F8 /* Controllers */,
 				2CB2EF3422B1EF4100D5C6F8 /* CustomView */,
 				2CB2EEFE22B1D74C00D5C6F8 /* AppDelegate.swift */,
@@ -314,6 +317,7 @@
 				2CB2EF0722B1D74C00D5C6F8 /* CustomViewsDemo.xcdatamodeld in Sources */,
 				2CB2EF3B22B1EFC200D5C6F8 /* CollectionViewCell.swift in Sources */,
 				2CB2EF4722B243FC00D5C6F8 /* TableViewCellWithImage.swift in Sources */,
+				2CB2EF4A22B250D200D5C6F8 /* Constants.swift in Sources */,
 				2CB2EF3722B1EFA800D5C6F8 /* TableViewCell.swift in Sources */,
 				2CB2EF4322B1F87000D5C6F8 /* CustomHeaderCell.swift in Sources */,
 				2CB2EF3022B1DFF300D5C6F8 /* TableViewController.swift in Sources */,

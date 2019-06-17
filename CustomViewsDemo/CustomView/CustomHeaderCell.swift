@@ -10,17 +10,20 @@ import UIKit
 
 class CustomHeaderCell: UITableViewCell {
 
+    var reloadSections: ((_ section: Int) -> Void)?
+    var shouldDisplayCells: Bool?
+    var section: Int = 0
+
     @IBOutlet weak var label: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(didTapHeader)))
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    @objc private func didTapHeader() {
+        self.reloadSections?(section)
     }
     
 }

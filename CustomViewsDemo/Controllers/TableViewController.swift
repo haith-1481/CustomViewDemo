@@ -8,15 +8,18 @@
 
 import UIKit
 
+
+struct CellConstant {
+    let tableViewCellID = "TableViewCell"
+    let customHeaderCellID = "CustomHeaderCell"
+    let tableViewCellWithImageID = "TableViewCellWithImage"
+}
+
 class TableViewController: UIViewController {
 
     @IBOutlet weak var tableView: UITableView!
-    
-    var countriesinEurope = ["France","Spain","Germany"]
-    var countriesinAsia = ["Japan","China","India"]
-    var countriesInSouthAmerica = ["Argentia","Brasil","Chile"]
-    var testCellSizing = ["Imagine that you have a movie-crazy client who wants an app to show off a number of favorite film directors and some of their most prominent work. Not just any directors, actually, just their favorite auteurs.", "“Auteurs?” you ask, “That sounds French.”", "Oui, it is. The auteur theory of film making arose in France in the 1940s and it basically means that the director is the driving creative force behind a film. Not every director is an auteur — only the ones who stamp each film with their individual styles. Think Tarantino or Scorsese. And not everyone agrees with this theory — don’t get your screenwriter friend started. But, the client is always right, so you’re ready to start rolling.", "There’s one problem: “We started making the app, but we’re stumped at how to display the content in a table view,” your client admits. “Our table view cells have to resize (gulp!) dynamically! Can you make it work?”"]
-    var imageArr: [UIImage] = []
+
+    var editingSection: Int = 10
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,15 +39,13 @@ class TableViewController: UIViewController {
         tableView.register(headerNib, forCellReuseIdentifier: "CustomHeaderCell")
         let imageNib = UINib(nibName: "TableViewCellWithImage", bundle: nil)
         tableView.register(imageNib, forCellReuseIdentifier: "TableViewCellWithImage")
-        let image = UIImage(imageLiteralResourceName: "doge_meme")
-        let image1 = UIImage(imageLiteralResourceName: "Snowy_Owl")
-        let image2 = UIImage(imageLiteralResourceName: "momo")
-        let image3 = UIImage(imageLiteralResourceName: "tower")
-        imageArr.append(image)
-        imageArr.append(image1)
-        imageArr.append(image2)
-        imageArr.append(image3)
+        tableViewReload()
+    }
 
+    private func tableViewReload() {
+        if (self.tableView.contentOffset.y - self.tableView.contentInset.bottom >= self.tableView.contentSize.height - self.tableView.bounds.size.height) {
+            tableView.reloadData()
+        }
     }
 
 }
@@ -59,6 +60,8 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource {
         switch section {
         case 3, 4:
             return 4
+        case editingSection:
+            return 0
         default:
             return 3
         }
@@ -68,18 +71,18 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell", for: indexPath) as? TableViewCell else { return UITableViewCell() }
         guard let cellWithImage = tableView.dequeueReusableCell(withIdentifier: "TableViewCellWithImage", for: indexPath) as? TableViewCellWithImage else { return UITableViewCell() }
         if indexPath.section == 4 {
-            cellWithImage.displayImage.image = imageArr[indexPath.row]
+            cellWithImage.displayImage.image = Constant.imageArr[indexPath.row]
             return cellWithImage
         } else {
             switch (indexPath.section) {
             case 0:
-                cell.label.text = countriesinEurope[indexPath.row]
+                cell.label.text = Constant.countriesinEurope[indexPath.row]
             case 1:
-                cell.label.text = countriesinAsia[indexPath.row]
+                cell.label.text = Constant.countriesinAsia[indexPath.row]
             case 2:
-                cell.label.text = countriesInSouthAmerica[indexPath.row]
+                cell.label.text = Constant.countriesInSouthAmerica[indexPath.row]
             case 3:
-                cell.label.text = testCellSizing[indexPath.row]
+                cell.label.text = Constant.testCellSizing[indexPath.row]
             default:
                 cell.label.text = "Other"
             }
@@ -90,6 +93,18 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let headerCell = tableView.dequeueReusableCell(withIdentifier: "CustomHeaderCell") as! CustomHeaderCell
         headerCell.backgroundColor = .orange
+        headerCell.shouldDisplayCells = true
+        headerCell.section = section
+
+        headerCell.reloadSections = { [weak self] (section: Int) in
+            headerCell.shouldDisplayCells?.toggle()
+            guard let shouldDisplay = headerCell.shouldDisplayCells else { return }
+            if !shouldDisplay {
+                self?.tableView?.beginUpdates()
+                self?.tableView?.reloadSections([section], with: .fade)
+                self?.tableView?.endUpdates()
+            }
+        }
 
         switch (section) {
         case 0:
@@ -130,6 +145,16 @@ extension TableViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 40
     }
+
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        let lastElement = dataSource.count - 1
+//        if !loadingData && indexPath.row == lastElement {
+//            indicator.startAnimating()
+//            loadingData = true
+//            loadMoreData()
+//        }
+    }
+
 
     /*
      // Override to support conditional editing of the table view.
